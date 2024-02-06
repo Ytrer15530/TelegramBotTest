@@ -3,7 +3,9 @@ from aiogram import types, F, Router
 import pyjokes
 import random
 import requests
-from utils import get_fruits, resp
+from utils import get_fruits
+from keyboard import keyboard
+# from handlers.weather_handler import weather_router, weather_message_handler
 
 test_router = Router()
 
@@ -13,6 +15,7 @@ test_router = Router()
 #     logging.info(f'{message.from_user} Tell a joke')
 #     joke = pyjokes.get_joke()
 #     await message.answer(joke)
+#
 #
 # @test_router.message(F.text == "Get Fruits")
 # async def get_category(message: types.Message):
@@ -36,76 +39,10 @@ test_router = Router()
 #     # img = types.URLInputFile(response['file'])
 #     card = f"Coffee: {response['file']}"
 #     await message.answer(card)
-
-@test_router.message(F.text == "Kyiv")
-async def kyiv_weather(message: types.Message):
-    logging.info(f'{message.from_user.first_name} Kyiv')
-    api = f'https://api.weatherapi.com/v1/current.json?key=2a09ee3bbc5e4b96b82133730241301&q=kyiv&aqi=no'
-    await message.answer("wait...")
-    resp = requests.get(api).json()
-    temperature = resp['current']['temp_c']
-    condition = resp['current']['condition']['text']
-    icon = resp['current']['condition']['icon']
-    card = f'''Weather in Kyiv is {temperature}°C
-{condition}'''
-    await message.answer(card)
-    await message.answer_photo(icon[2:])
-
-@test_router.message(F.text == "London")
-async def london_weather(message: types.Message):
-    logging.info(f'{message.from_user.first_name} London')
-    api = f'https://api.weatherapi.com/v1/current.json?key=2a09ee3bbc5e4b96b82133730241301&q=london&aqi=no'
-    await message.answer("wait...")
-    resp = requests.get(api).json()
-    temperature = resp['current']['temp_c']
-    condition = resp['current']['condition']['text']
-    icon = resp['current']['condition']['icon']
-    card = f'''Weather in London is {temperature}°C
-{condition}'''
-    await message.answer(card)
-    await message.answer_photo(icon[2:])
-
-
-@test_router.message(F.text == "Tokyo")
-async def tokio_weather(message: types.Message):
-    logging.info(f'{message.from_user.first_name} Tokyo')
-    api = f'https://api.weatherapi.com/v1/current.json?key=2a09ee3bbc5e4b96b82133730241301&q=tokyo&aqi=no'
-    await message.answer("wait...")
-    resp = requests.get(api).json()
-    temperature = resp['current']['temp_c']
-    condition = resp['current']['condition']['text']
-    icon = resp['current']['condition']['icon']
-    card = f'''Weather in Tokyo is {temperature}°C
-{condition}'''
-    await message.answer(card)
-    await message.answer_photo(icon[2:])
-
-
-@test_router.message(F.text == "Warsaw")
-async def warsaw_weather(message: types.Message):
-    logging.info(f'{message.from_user.first_name} Warsaw')
-    api = f'https://api.weatherapi.com/v1/current.json?key=2a09ee3bbc5e4b96b82133730241301&q=warsaw&aqi=no'
-    await message.answer("wait...")
-    resp = requests.get(api).json()
-    temperature = resp['current']['temp_c']
-    condition = resp['current']['condition']['text']
-    icon = resp['current']['condition']['icon']
-    card = f'''Weather in Warsaw is {temperature}°C
-{condition}'''
-    await message.answer(card)
-    await message.answer_photo(icon[2:])
-
-
-@test_router.message(F.text == "Shanghai")
-async def shanghai_weather(message: types.Message):
-    logging.info(f'{message.from_user.first_name} Shanghai')
-    api = f'https://api.weatherapi.com/v1/current.json?key=2a09ee3bbc5e4b96b82133730241301&q=shanghai&aqi=no'
-    await message.answer("wait...")
-    resp = requests.get(api).json()
-    temperature = resp['current']['temp_c']
-    condition = resp['current']['condition']['text']
-    icon = resp['current']['condition']['icon']
-    card = f'''Weather in Shanghai is {temperature}°C
-{condition}'''
-    await message.answer(card)
-    await message.answer_photo(icon[2:])
+#
+#
+# @test_router.message(F.text == "Weather")
+# async def change_keyboard_to_weather(message: types.Message):
+#     logging.info(f"{message.from_user.first_name} WEATHER")
+#     await message.answer("Choose city", reply_markup=keyboard_weather)
+#     weather_router.register_message_handler(weather_message_handler)
